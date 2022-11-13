@@ -1,10 +1,8 @@
 ---
-
-let name = "Heyo";
 import { Code } from 'astro/components';
+import '../styles/global.css';
 ---
 
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,10 +17,38 @@ import { Code } from 'astro/components';
             <div class="subtitle">Welcome to the lair</div>
         </div>
     </div>
+    <div class="about-me-container">
+        <div class="about-me-heading">About Me</div>
+        <p class="about-me-text">
+            I'm Adwait Rathee, from India.<br>
+            A programmer with weird takes on certain topics.<br>
+            Check out my <a href="/blog">blog</a> if you care to find out.
+        </p>
+    </div>
 </body>
 </html>
 
 <style>
+
+.about-me-container {
+    display: flex;
+    /* background-color: blue; */
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 30em;
+}
+
+.about-me-heading {
+    font-size: 3em;
+    text-align: center;
+}
+
+.about-me-text {
+    font-size: 1.2em;
+    text-align: center;
+}
 
 body {
     background-color: black;
@@ -33,6 +59,8 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    overflow-x: hidden;
+    /* overflow: hidden; */
 }
 
 .container {
@@ -67,4 +95,18 @@ body {
     width: 12em;
 }
 
+body::-webkit-scrollbar {
+    width: 12px;
+    height: 20em;
+}
+
+body::-webkit-scrollbar-track {
+    background: rgba(225, 225, 225, 0);
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: rgba(225, 225, 225, 0.20);
+    border-radius: 20px;
+    border: 3px;
+}
 </style>

@@ -1,0 +1,55 @@
+---
+
+import '../styles/global.css';
+const { frontmatter } = Astro.props;
+
+
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{frontmatter.title}</title>
+</head>
+<body>
+    <div class="main-title">{frontmatter.title}</div>
+
+    <div class="container">
+        <slot/>
+    </div>
+</body>
+</html>
+
+<style>
+
+.main-title {
+    margin-bottom: 2em;
+    margin-top: 1em;
+    color: orange;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #222;
+}
+
+.container {
+    width: 50vw;
+}
+
+.main-title {
+    font-size: 4em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    color: red;
+}
+
+</style>

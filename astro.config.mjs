@@ -1,13 +1,14 @@
+import { defineConfig } from "astro/config";
+import mdx from "@astrojs/mdx";
 // import { defineConfig } from 'astro/config';
 
-// https://astro.build/config
-// export default defineConfig({});
-export default {
-    markdown: {
-        shikiConfig: {
-            theme: 'palenight',
-            langs: ['rust'],
-            wrap: true,
-        },
-    },
-}
+export default defineConfig({
+  markdown: {
+    shikiConfig: {
+      theme: 'one-dark-pro',
+      langs: ['rust'],
+      wrap: true
+    }
+  },
+  integrations: [mdx()]
+});
