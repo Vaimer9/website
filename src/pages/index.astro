@@ -1,7 +1,70 @@
 ---
 
 let name = "Heyo";
-
+import { Code } from 'astro/components';
 ---
 
-<h1>Hello {name}</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vaimer's basement</title>
+</head>
+<body>
+    <div class="container">
+        <div class="subcontainer">
+            <div class="title">Vaimer9</div>
+            <div class="subtitle">Welcome to the lair</div>
+        </div>
+    </div>
+</body>
+</html>
+
+<style>
+
+body {
+    background-color: black;
+    color: white;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 30px;
+}
+
+.title {
+    font-size: 3em;
+    margin-bottom: 0.1em;
+    text-align: center;
+}
+
+.subtitle {
+    font-size: 1em;
+    margin-left: auto;
+    text-align: right;
+    color: rgba(225, 225, 225, 0.5);
+}
+
+.title, .subtitle {
+    /* background-color: green; */
+}
+
+.subcontainer {
+    /* background-color: blue; */
+    width: 12em;
+}
+
+</style>
