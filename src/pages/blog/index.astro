@@ -1,6 +1,10 @@
 ---
-import style from '../components/style.astro';
 import '../../styles/global.css';
+import BlogListItem from "../../components/blogpost.astro";
+
+let posts = await Astro.glob("../blog/*.md");
+
+
 ---
 
 <html lang="en">
@@ -11,7 +15,25 @@ import '../../styles/global.css';
     <title>vaimer's blog</title>
 </head>
 <body>
-    this is blogs page    
+    <div class="main-title"></div>
+    <div class="blogs-container">
+        {posts.map(post => (
+            <BlogListItem
+                title={post.frontmatter.title}
+                date={post.frontmatter.date}
+                description={post.frontmatter.description}
+            />
+        ))}
+    </div>
 </body>
 </html>
 
+
+
+<style>
+
+body {
+    background-color: #222;
+}
+
+</style>

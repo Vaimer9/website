@@ -1,0 +1,18 @@
+---
+/* interface Props { */
+/*     title: string; */
+/*     date: string; */
+/*     description: string; */
+/* } */
+
+const { title, date, description } = Astro.props;
+
+
+---
+
+<div class="container">
+    Hello
+    <div class="title">{title}</div>
+    <div class="description">{description}</div>
+    <div class="date">{date}</div>
+</div>
