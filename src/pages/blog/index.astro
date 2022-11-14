@@ -2,38 +2,63 @@
 import '../../styles/global.css';
 import BlogListItem from "../../components/BlogListItem.astro";
 
-let posts = await Astro.glob("../blog/*.md");
+const posts = (await Astro.glob('./*.md')).sort(
+	(a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf()
+);
 
 
 ---
 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>vaimer's blog</title>
+    <title>Document</title>
 </head>
 <body>
-    <div class="main-title"></div>
-    <div class="blogs-container">
-        {posts.map(post => (
-            <BlogListItem
-                title={post.frontmatter.title}
-                date={post.frontmatter.date}
-                description={post.frontmatter.description}
-            />
-        ))}
+    
+    <div class="container">
+        <div class="heading">My Blogposts</div>
+        <div class="blog-list">
+            {posts.map(post => (
+                <BlogListItem
+                    title={post.frontmatter.title}
+                    date={post.frontmatter.date}
+                    description={post.frontmatter.description}
+                />
+            ))}
+        </div>
     </div>
+
 </body>
 </html>
 
-
-
 <style>
 
+.heading {
+    text-align: center;
+    font-size: 4em;
+    margin-top: 1em;
+    margin-bottom: 2em;
+    color: orangered;
+}
+
+.container {
+    height: 100%;
+    width: 65vw;
+}
+
 body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #222;
+}
+
+html, body {
+    height: 100%;
 }
 
 </style>

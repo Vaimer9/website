@@ -14,9 +14,8 @@ const { frontmatter } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{frontmatter.title}</title>
 </head>
-<body>
+<body class="internal-body">
     <div class="main-title">{frontmatter.title}</div>
-
     <div class="container">
         <slot/>
     </div>
@@ -29,9 +28,10 @@ const { frontmatter } = Astro.props;
     margin-bottom: 2em;
     margin-top: 1em;
     color: orange;
+    font-size: 4em;
 }
 
-body {
+.internal-body {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -40,16 +40,7 @@ body {
 }
 
 .container {
-    width: 50vw;
-}
-
-.main-title {
-    font-size: 4em;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-weight: normal;
-    color: red;
+    width: 60vw;
 }
 
 </style>

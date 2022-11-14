@@ -1,9 +1,9 @@
 ---
 
 layout: ../../layouts/BlogLayout.astro
-title: "Oxidisation" 
-date: "Nov 09 2022"
-description: "How a few oxygen atoms change lives"
+title: "Reduction" 
+date: "Nov 10 2022"
+description: "How a few hydrogen atoms change lives"
 
 
 ---

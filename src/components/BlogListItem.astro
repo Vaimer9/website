@@ -1,18 +1,52 @@
 ---
-/* interface Props { */
-/*     title: string; */
-/*     date: string; */
-/*     description: string; */
-/* } */
+interface Props {
+    title: string;
+    date: string;
+    description: string;
+}
 
 const { title, date, description } = Astro.props;
+let href = title.toLowerCase();
 
 
 ---
 
 <div class="container">
-    Hello
-    <div class="title">{title}</div>
+    <div class="title"><a href=`/blog/${href}` class="title-a">{title}</a></div>
     <div class="description">{description}</div>
     <div class="date">{date}</div>
 </div>
+
+<style>
+
+a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
+}
+
+.container {
+    border: solid;
+    border-width: 2px;
+    margin: 0.5em;
+    height: 7em;
+    border-radius: 10px;
+}
+
+.title {
+    font-size: 2.5em;
+}
+
+.description {
+    color: rgba(225, 225, 225, 0.5);
+    padding-left: 5%;
+}
+
+.date {
+    padding-left: 90%
+}
+
+.title, .description, .date {
+    margin: 0.2em;
+}
+
+</style>
