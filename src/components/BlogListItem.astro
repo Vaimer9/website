@@ -6,13 +6,13 @@ interface Props {
 }
 
 const { title, date, description } = Astro.props;
-let href = title.toLowerCase();
 
+let href: string = `/blog/${title.toLowerCase()}`;
 
 ---
 
 <div class="container">
-    <div class="title"><a href=`/blog/${href}` class="title-a">{title}</a></div>
+    <div class="title"><a href={href} class="title-a">{title}</a></div>
     <div class="description">{description}</div>
     <div class="date">{date}</div>
 </div>
@@ -26,10 +26,9 @@ a:hover, a:visited, a:link, a:active
 
 .container {
     border: solid;
-    border-width: 2px;
-    margin: 0.5em;
+    border-width: 2px 0 2px 0;
+    margin: 1em;
     height: 7em;
-    border-radius: 10px;
 }
 
 .title {
@@ -38,11 +37,12 @@ a:hover, a:visited, a:link, a:active
 
 .description {
     color: rgba(225, 225, 225, 0.5);
-    padding-left: 5%;
+    padding-left: 0.5em;
 }
 
 .date {
-    padding-left: 90%
+    text-align: right;
+    padding-right: 0.5em;
 }
 
 .title, .description, .date {

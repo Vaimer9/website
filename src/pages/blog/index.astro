@@ -6,7 +6,6 @@ const posts = (await Astro.glob('./*.md')).sort(
 	(a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf()
 );
 
-
 ---
 
 <!DOCTYPE html>
@@ -15,11 +14,11 @@ const posts = (await Astro.glob('./*.md')).sort(
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>My BlogPosts</title>
 </head>
-<body>
-    
-    <div class="container">
+<body class="inner-body">
+
+   <div class="container">
         <div class="heading">My Blogposts</div>
         <div class="blog-list">
             {posts.map(post => (
@@ -47,14 +46,14 @@ const posts = (await Astro.glob('./*.md')).sort(
 
 .container {
     height: 100%;
-    width: 65vw;
+    width: 65em;
 }
 
-body {
+.inner-body {
+    background-color: #222;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #222;
 }
 
 html, body {

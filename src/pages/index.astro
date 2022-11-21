@@ -17,37 +17,73 @@ import '../styles/global.css';
             <div class="subtitle">Welcome to the lair</div>
         </div>
     </div>
-    <div class="about-me-container">
-        <div class="about-me-heading">About Me</div>
-        <p class="about-me-text">
-            I'm Adwait Rathee, from India.<br>
-            A programmer with weird takes on certain topics.<br>
-            Check out my <a href="/blog">blog</a> if you care to find out.
-        </p>
+
+    <div class="info-container">
+        <div class="about-me-partition">
+            <div class="about-me-container">
+                <div class="about-me-heading">About Me</div>
+                <p>
+                    I'm Adwait Rathee, from India.<br>
+                    A programmer with weird takes on certain topics.<br>
+                    Check out my <a href="/blog">blog</a> if you care to find out.
+                </p>
+            </div>
+        </div>
+
+        <div class="projects-partition">
+            <div class="projects-container">
+                <div class="projects-heading">My Projects</div>
+                <div class="projects-content">
+                    <li><a href="https://github.com/vaimer9/vsh">Vsh</a>. A shell written in rust.</li>
+                    <li><a href="https://github.com/vaimer9/pinabstract">Pinabstract</a>. An abstraction layer over the pi pico api.</li>
+                    <li><a href="https://github.com/vaimer9/detach">Detach</a>.A VCS for your spotify playlist.</li>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
 
 <style>
 
-.about-me-container {
+.info-container {
     display: flex;
-    /* background-color: blue; */
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
     width: 100vw;
-    height: 30em;
+    height: 40em;
 }
 
-.about-me-heading {
+.about-me-heading, .projects-heading {
     font-size: 3em;
     text-align: center;
 }
 
-.about-me-text {
+.about-me-container {
     font-size: 1.2em;
     text-align: center;
+    margin-right: 10em;
+    margin-bottom: 17em;
+}
+
+.projects-container {
+    font-size: 1.2em;
+    margin-left: 12em;
+    margin-top: 11em;
+}
+
+.projects-content {
+    padding-left: 1em;
+    margin-top: 1.5em;
+}
+
+.about-me-partition, .projects-partition {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 body {
@@ -60,7 +96,6 @@ body {
     justify-content: center;
     flex-direction: column;
     overflow-x: hidden;
-    /* overflow: hidden; */
 }
 
 .container {
@@ -87,11 +122,15 @@ body {
 }
 
 .title, .subtitle {
-    /* background-color: green; */
 }
 
 .subcontainer {
-    /* background-color: blue; */
     width: 12em;
 }
+
+a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
+}
+
 </style>
