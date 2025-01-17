@@ -2,7 +2,7 @@
 import '../../styles/global.css';
 import BlogListItem from "../../components/BlogListItem.astro";
 
-const posts = (await Astro.glob('./*.md')).sort(
+const posts = (await Astro.glob('./*.{md,mdx}')).sort(
 	(a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf()
 );
 
@@ -14,6 +14,7 @@ const posts = (await Astro.glob('./*.md')).sort(
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>My BlogPosts</title>
 </head>
 <body class="inner-body">
@@ -23,6 +24,7 @@ const posts = (await Astro.glob('./*.md')).sort(
         <div class="blog-list">
             {posts.map(post => (
                 <BlogListItem
+                    url={post.url}
                     title={post.frontmatter.title}
                     date={post.frontmatter.date}
                     description={post.frontmatter.description}

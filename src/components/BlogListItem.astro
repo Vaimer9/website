@@ -1,18 +1,19 @@
 ---
 interface Props {
+    url: string;
     title: string;
     date: string;
     description: string;
 }
 
-const { title, date, description } = Astro.props;
+const { url, title, date, description } = Astro.props;
 
 let href: string = `/blog/${title.toLowerCase()}`;
 
 ---
 
 <div class="container">
-    <div class="title"><a href={href} class="title-a">{title}</a></div>
+    <div class="title"><a href={url} class="title-a">{title}</a></div>
     <div class="description">{description}</div>
     <div class="date">{date}</div>
 </div>

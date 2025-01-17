@@ -1,6 +1,7 @@
 ---
-import { Code } from 'astro/components';
+import { Image } from 'astro:assets';
 import '../styles/global.css';
+import pfp from '../assets/blackpfp.png';
 ---
 
 <html lang="en">
@@ -8,13 +9,17 @@ import '../styles/global.css';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>vaimer's basement</title>
 </head>
 <body>
     <div class="container">
         <div class="subcontainer">
-            <div class="title">Vaimer9</div>
-            <div class="subtitle">Welcome to the lair</div>
+            <Image src={pfp} alt="Me irl" />
+            <div class="text-subcontainer">
+                <div class="title">Vaimer9</div>
+                <div class="subtitle">Welcome to the lair</div>
+            </div>
         </div>
     </div>
 
@@ -23,9 +28,10 @@ import '../styles/global.css';
             <div class="about-me-container">
                 <div class="about-me-heading">About Me</div>
                 <p>
-                    I'm Adwait Rathee, from India.<br>
-                    I like to talk about a lot of different things,<br>
-                    check out my <a href="/blog">blog</a> if you care to find out.
+                    I'm Adwait Rathee.<br>
+                    Currently a high school student.<br>
+                    I like to work on graphics and in general lower level backends.<br>
+                    Check out my <a href="/blog">blog</a> if you care to find out.
                 </p>
             </div>
         </div>
@@ -133,7 +139,13 @@ body {
 }
 
 .subcontainer {
-    width: 12em;
+    display: flex;
+    flex-direction: row;
+}
+
+.text-subcontainer {
+    padding-top: 2em;
+    padding-left: 1em;
 }
 
 </style>

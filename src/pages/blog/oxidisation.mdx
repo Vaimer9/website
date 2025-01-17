@@ -1,0 +1,34 @@
+---
+layout: ../../layouts/BlogLayout.astro
+title: "Lorem ipsum"
+date: "Nov 09 2022"
+description: "How a few oxygen atoms change lives"
+---
+import  { Image } from 'astro:assets';
+import climber from '../../assets/climber.png';
+import BlogImage from '../../components/BlogImage.astro';
+
+# A big text because YES
+
+<BlogImage src={climber} alt="goat" height="500em" width="auto" class="center" />
+
+## Some code
+
+```cpp
+int main(int argc, char** argv)
+{
+    std::cout << "Hello world" << std::endl;
+    return 0;
+}
+
+```
+
+## A lot of bullet points for some reason
+
+- This is a bullet point
+	- ABCDEFG
+- A second bullet point
+- Ykw here's a third bullet point
+
+### A small heading
+ABCD
