@@ -10,5 +10,6 @@ export default defineConfig({
       wrap: true
     }
   },
-  integrations: [mdx()]
+  integrations: [mdx()],
+  // experimental: { assets: true }
 });
