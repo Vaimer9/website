@@ -1,7 +1,14 @@
 ---
 import { Image } from 'astro:assets';
 import '../styles/global.css';
-import pfp from '../assets/blackpfp.png';
+import pfp from '../assets/fadepfp.png';
+
+let ps: Array<string> = [
+"Sober now",
+"Unemployed"
+
+];
+
 ---
 
 <html lang="en">
@@ -18,7 +25,7 @@ import pfp from '../assets/blackpfp.png';
             <Image src={pfp} alt="Me irl" />
             <div class="text-subcontainer">
                 <div class="title">Vaimer9</div>
-                <div class="subtitle">Welcome to the lair</div>
+                <div class="subtitle">{ps[Math.floor(Math.random() * ps.length)]}</div>
             </div>
         </div>
     </div>
@@ -27,7 +34,7 @@ import pfp from '../assets/blackpfp.png';
         <div class="about-me-partition">
             <div class="about-me-container">
                 <div class="about-me-heading">About Me</div>
-                <p>
+                <p class="about-me-content">
                     I'm Adwait Rathee.<br>
                     Currently a high school student.<br>
                     I like to work on graphics and in general lower level backends.<br>
@@ -52,52 +59,48 @@ import pfp from '../assets/blackpfp.png';
 
 <style>
 
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
 a {
     color: hotpink;
+    text-decoration: none;
 }
 
 a:hover {
     text-decoration: underline;
 }
 
-.info-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    height: 40em;
+.about-me-content, .projects-content {
+    padding-top: 1em;
+    text-align: center;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
 }
 
 .about-me-heading, .projects-heading {
-    font-size: 3em;
+    font-size: 2.5em;
     text-align: center;
 }
 
-.about-me-container {
-    font-size: 1.2em;
-    text-align: center;
-    margin-right: 10em;
-    margin-bottom: 17em;
-}
-
-.projects-container {
-    font-size: 1.2em;
-    margin-left: 7em;
-    margin-top: 11em;
-}
-
-.projects-content {
-    padding-left: 1em;
-    margin-top: 1.5em;
-}
-
-.about-me-partition, .projects-partition {
-    width: 50%;
-    height: 100%;
+.info-container {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    gap: 6em;
+    padding-bottom: 3em;
+}
+
+@media (min-width:800px) {
+    .info-container {
+        flex-direction: row;
+    }
+
+    .about-me-content, .projects-content {
+        text-align: left;
+    }
 }
 
 body {
@@ -140,12 +143,31 @@ body {
 
 .subcontainer {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
+    gap: 2em;
 }
 
 .text-subcontainer {
+    /*
     padding-top: 2em;
     padding-left: 1em;
+    */
+}
+
+@media (min-width:800px) {
+    .subcontainer {
+        flex-direction: row;
+        align-items: auto;
+        gap: 0;
+    }
+
+    .text-subcontainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 1em 0 0 1em;
+    }
 }
 
 </style>
