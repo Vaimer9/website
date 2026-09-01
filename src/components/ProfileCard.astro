@@ -1,0 +1,66 @@
+---
+import { Image } from 'astro:assets';
+import pfp from '../assets/fadepfp.png';
+---
+<section class="profile-card">
+    <div class="avatar" aria-hidden="true">
+        <Image src={pfp} alt="avatar"/>
+    </div>
+    <div class="identity">
+        <h1>vaimer9</h1>
+        <p class="tagline">sober now</p>
+    </div>
+</section>
+
+<style>
+    .profile-card {
+        border: 2px solid var(--c-profile);
+        border-radius: var(--radius);
+        /* box-shadow: 0 0 18px -6px var(--c-profile); */
+        display: flex;
+        align-items: stretch;
+        overflow: hidden;
+    }
+
+    .avatar {
+        width: 42%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 0.75rem;
+        border-right: 2px solid var(--c-profile);
+        color: var(--c-profile);
+        font-size: 0.8rem;
+        opacity: 0.8;
+        overflow: hidden;
+    }
+
+    .avatar :global(img) {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .identity {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 1rem 1.25rem;
+        min-width: 0;
+    }
+
+    h1 {
+        margin: 0;
+        color: var(--c-profile);
+        font-size: 1.4rem;
+    }
+
+    .tagline {
+        margin: 0.25rem 0 0;
+        color: var(--text-dim);
+        font-size: 0.85rem;
+    }
+</style>

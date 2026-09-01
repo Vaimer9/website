@@ -1,0 +1,45 @@
+---
+---
+
+<header class="site-header">
+    <span class="brand">~/vaimer9</span>
+    <nav class="nav">
+        <a href="/">home</a>
+        <a href="/blog">blog</a>
+        <a href="/projects">projects</a>
+    </nav>
+</header>
+
+<style>
+    .site-header {
+        border: 2px solid var(--c-header);
+        border-radius: var(--radius);
+        /* box-shadow: 0 0 18px -6px var(--c-header); */
+        padding: 0.85rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .brand {
+        color: var(--c-header);
+        font-weight: 600;
+        letter-spacing: 0.02em;
+    }
+
+    .nav {
+        display: flex;
+        gap: 1.25rem;
+    }
+
+    .nav a {
+        color: var(--text-dim);
+        text-decoration: none;
+        font-size: 0.9rem;
+    }
+
+    .nav a:hover {
+        color: var(--c-header);
+    }
+</style>
+

@@ -1,0 +1,82 @@
+---
+// Swap this for real posts (content collection, API, etc.) later.
+const posts = [
+    { title: "setting up vsh", date: "2026-06-02" },
+    { title: "notes on the pi pico", date: "2026-05-14" },
+    { title: "why detach exists", date: "2026-04-30" },
+];
+---
+
+<section class="blog-list">
+    <h2>blog</h2>
+    <ul>
+        {
+            posts.map((post) => (
+                <li>
+                    <a href="#">{post.title}</a>
+                    <span class="date">{post.date}</span>
+                </li>
+            ))
+        }
+    </ul>
+</section>
+
+<style>
+    .blog-list {
+        border: 2px solid var(--c-blog);
+        border-radius: var(--radius);
+        /* box-shadow: 0 0 18px -6px var(--c-blog); */
+        padding: 1.25rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+    }
+
+    h2 {
+        margin: 0 0 0.75rem;
+        color: var(--c-blog);
+        font-size: 1.1rem;
+        flex-shrink: 0;
+    }
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        overflow-y: auto;
+    }
+
+    @media (max-width: 860px) {
+        .blog-list {
+            height: 320px;
+        }
+    }
+
+    li {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        border-bottom: 1px solid rgba(151, 117, 250, 0.3);
+        padding-bottom: 0.5rem;
+    }
+
+    a {
+        color: var(--text);
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: var(--c-blog);
+    }
+
+    .date {
+        color: var(--text-dim);
+        font-size: 0.8rem;
+        white-space: nowrap;
+    }
+</style>

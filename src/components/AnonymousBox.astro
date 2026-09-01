@@ -1,0 +1,76 @@
+---
+---
+<section class="anon-box">
+    <h2>send anonymous text</h2>
+    <form class="anon-form" id="anon-form">
+        <textarea placeholder="say something..." rows="4"></textarea>
+        <button type="submit">send</button>
+    </form>
+</section>
+
+<style>
+    .anon-box {
+        border: 2px solid var(--c-anon);
+        border-radius: var(--radius);
+        /* box-shadow: 0 0 18px -6px var(--c-anon); */
+        padding: 1.25rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+    }
+
+    h2 {
+        margin: 0 0 0.75rem;
+        color: var(--c-anon);
+        font-size: 1rem;
+        flex-shrink: 0;
+    }
+
+    .anon-form {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    textarea {
+        flex: 1;
+        resize: none;
+        background: transparent;
+        border: 1px solid rgba(216, 216, 224, 0.4);
+        border-radius: 8px;
+        padding: 0.6rem;
+        color: var(--text);
+        font-family: inherit;
+        font-size: 0.85rem;
+    }
+
+    textarea:focus {
+        outline: none;
+        border-color: var(--c-anon);
+    }
+
+    button {
+        align-self: flex-end;
+        background: transparent;
+        border: 1px solid var(--c-anon);
+        color: var(--c-anon);
+        border-radius: 8px;
+        padding: 0.45rem 1.1rem;
+        cursor: pointer;
+        font-family: inherit;
+    }
+
+    button:hover {
+        background: var(--c-anon);
+        color: #0a0a0c;
+    }
+</style>
+
+<script>
+    // TODO: Actually add some functionality to this
+    document.getElementById("anon-form")?.addEventListener("submit", (event) => {
+        event.preventDefault();
+        console.log("send anonymous text — not wired up yet");
+    });
+</script>

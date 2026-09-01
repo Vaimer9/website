@@ -1,0 +1,51 @@
+---
+interface Props {
+    title?: string;
+}
+const { title = "vaimer9" } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{title}</title>
+    </head>
+    <body>
+        <slot />
+    </body>
+</html>
+
+<style is:global>
+    :root {
+        --bg: #000000;
+        --text: #e8e8ec;
+        --text-dim: #9a9aa4;
+
+        /* one accent per section — swap these to retheme the whole site */
+        --c-header: #d8d8e0;
+        --c-profile: #d8d8e0;
+        --c-terminal: #d8d8e0;
+        --c-photos: #d8d8e0;
+        --c-blog: #d8d8e0;
+        --c-anon: #d8d8e0;
+
+        --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular,
+            Menlo, Consolas, monospace;
+        --radius: 0;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--font-mono);
+        min-height: 100vh;
+    }
+</style>

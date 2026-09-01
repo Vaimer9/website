@@ -3,171 +3,128 @@ import { Image } from 'astro:assets';
 import '../styles/global.css';
 import pfp from '../assets/fadepfp.png';
 
-let ps: Array<string> = [
-"Sober now",
-"Unemployed"
+import HomeLayout from '../layouts/HomeLayout.astro';
 
-];
+import Header from '../components/Header.astro';
+import ProfileCard from '../components/ProfileCard.astro';
+import Terminal from '../components/Terminal.astro';
+import PhotoCollage from '../components/PhotoCollage.astro';
+import BlogHomeList from '../components/BlogHomeList.astro';
+import AnonymousBox from '../components/AnonymousBox.astro';
 
 ---
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>vaimer's basement</title>
-</head>
-<body>
-    <div class="container">
-        <div class="subcontainer">
-            <Image src={pfp} alt="Me irl" />
-            <div class="text-subcontainer">
-                <div class="title">Vaimer9</div>
-                <div class="subtitle">{ps[Math.floor(Math.random() * ps.length)]}</div>
+<HomeLayout title="vaimer9">
+    <main class="page">
+        <Header />
+ 
+        <div class="body-grid">
+            <div class="left-col">
+                <ProfileCard />
+                <Terminal />
             </div>
-        </div>
-    </div>
-
-    <div class="info-container">
-        <div class="about-me-partition">
-            <div class="about-me-container">
-                <div class="about-me-heading">About Me</div>
-                <p class="about-me-content">
-                    I'm Adwait Rathee.<br>
-                    Currently a high school student.<br>
-                    I like to work on graphics and in general lower level backends.<br>
-                    Check out my <a href="/blog">blog</a> if you care to find out.
-                </p>
-            </div>
-        </div>
-
-        <div class="projects-partition">
-            <div class="projects-container">
-                <div class="projects-heading">My Projects</div>
-                <div class="projects-content">
-                    <li><a href="https://github.com/vaimer9/vsh">Vsh</a>. A shell written in rust.</li>
-                    <li><a href="https://github.com/vaimer9/pinabstract">Pinabstract</a>. An abstraction layer over the pi pico api.</li>
-                    <li><a href="https://github.com/vaimer9/detach">Detach</a>. A VCS for your spotify playlist.</li>
+ 
+            <div class="right-col">
+                <PhotoCollage />
+                <div class="bottom-row">
+                    <BlogHomeList />
+                    <AnonymousBox />
                 </div>
             </div>
         </div>
-    </div>
-</body>
-</html>
-
+    </main>
+</HomeLayout>
+ 
+<style is:global>
+    html,
+    body {
+        height: 100%;
+        overflow: hidden;
+    }
+</style>
+ 
 <style>
-
-*{
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
-}
-
-a {
-    color: hotpink;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-.about-me-content, .projects-content {
-    padding-top: 1em;
-    text-align: center;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-}
-
-.about-me-heading, .projects-heading {
-    font-size: 2.5em;
-    text-align: center;
-}
-
-.info-container {
-    display: flex;
-    flex-direction: column;
-    gap: 6em;
-    padding-bottom: 3em;
-}
-
-@media (min-width:800px) {
-    .info-container {
-        flex-direction: row;
-    }
-
-    .about-me-content, .projects-content {
-        text-align: left;
-    }
-}
-
-body {
-    background-color: black;
-    color: white;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    overflow-x: hidden;
-}
-
-.container {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    font-size: 30px;
-}
-
-.title {
-    font-size: 3em;
-    margin-bottom: 0.1em;
-    text-align: center;
-}
-
-.subtitle {
-    font-size: 1em;
-    margin-left: auto;
-    text-align: right;
-    color: rgba(225, 225, 225, 0.5);
-}
-
-.title, .subtitle {
-}
-
-.subcontainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2em;
-}
-
-.text-subcontainer {
-    /*
-    padding-top: 2em;
-    padding-left: 1em;
-    */
-}
-
-@media (min-width:800px) {
-    .subcontainer {
-        flex-direction: row;
-        align-items: auto;
-        gap: 0;
-    }
-
-    .text-subcontainer {
+    .page {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 1.25rem;
+        height: 100vh;
+        overflow: hidden;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        padding: 1em 0 0 1em;
+        gap: 0.5rem;
     }
-}
-
+ 
+    .body-grid {
+        flex: 1;
+        display: grid;
+        grid-template-columns: minmax(260px, 34%) 1fr;
+        grid-template-rows: 1fr;
+        gap: 0.5rem;
+        min-height: 0;
+    }
+ 
+    .left-col {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        min-height: 0;
+    }
+ 
+    .left-col :global(.terminal) {
+        flex: 1;
+        min-height: 0;
+    }
+ 
+    .right-col {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        min-height: 0;
+    }
+ 
+    .right-col :global(.photo-collage) {
+        flex: 0 0 45%;
+        min-height: 0;
+    }
+ 
+    .bottom-row {
+        flex: 1;
+        display: grid;
+        grid-template-columns: 2.2fr 1fr;
+        grid-template-rows: 1fr;
+        gap: 0.5rem;
+        min-height: 0;
+    }
+ 
+    @media (max-width: 860px) {
+        :global(html),
+        :global(body) {
+            height: auto;
+            overflow: visible;
+        }
+ 
+        .page {
+            height: auto;
+            overflow: visible;
+        }
+ 
+        .body-grid {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto;
+        }
+ 
+        .bottom-row {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto;
+        }
+ 
+        .left-col :global(.terminal) {
+            flex: none;
+        }
+ 
+        .right-col :global(.photo-collage) {
+            flex: none;
+        }
+    }
 </style>

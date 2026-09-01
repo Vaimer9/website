@@ -1,0 +1,147 @@
+---
+---
+<section class="terminal">
+    <div class="term-bar">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+        <span class="term-title">guest@vaimer9: ~</span>
+    </div>
+
+    <div class="term-body" id="term-body">
+        <p class="line">
+            Welcome. Type <span class="hl">help</span> to see available commands.
+        </p>
+        <p class="line prompt-line" id="prompt-line">
+            <span class="prompt">guest@vaimer9:~$</span>
+            <span
+                id="term-input"
+                class="term-input"
+                contenteditable="true"
+                spellcheck="false"
+                role="textbox"
+                aria-label="terminal input"></span>
+        </p>
+    </div>
+</section>
+
+<style>
+    .terminal {
+        border: 2px solid var(--c-terminal);
+        border-radius: var(--radius);
+        /* box-shadow: 0 0 18px -6px var(--c-terminal); */
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        min-height: 0;
+    }
+
+    @media (max-width: 860px) {
+        .terminal {
+            height: 380px;
+        }
+    }
+
+    .term-bar {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.6rem 0.9rem;
+        border-bottom: 2px solid var(--c-terminal);
+        flex-shrink: 0;
+    }
+
+    .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: inline-block;
+    }
+    .dot.red {
+        background: #ff5f56;
+    }
+    .dot.yellow {
+        background: #ffbd2e;
+    }
+    .dot.green {
+        background: #27c93f;
+    }
+
+    .term-title {
+        margin-left: 0.6rem;
+        color: var(--c-terminal);
+        font-size: 0.8rem;
+        opacity: 0.8;
+    }
+
+    .term-body {
+        flex: 1;
+        padding: 1rem 1.1rem;
+        overflow-y: auto;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        min-height: 0;
+    }
+
+    .line {
+        margin: 0 0 0.4rem;
+        color: var(--text-dim);
+    }
+
+    .hl {
+        color: var(--c-terminal);
+    }
+
+    .prompt-line {
+        display: flex;
+        gap: 0.5rem;
+        color: var(--text);
+    }
+
+    .prompt {
+        color: var(--c-terminal);
+        white-space: nowrap;
+    }
+
+    .term-input {
+        flex: 1;
+        outline: none;
+        caret-color: var(--c-terminal);
+    }
+</style>
+
+<script>
+    // VERY basic terminal logic
+    // TODO: Make ts better
+    const commands = {
+        help: "available: about, whoami, neofetch, help",
+        whoami: "guest",
+        about: "adwait — building vaimer9's basement.",
+        neofetch: "OS: vaimer9-OS  |    Shell: vsh  |  Uptime: ???",
+    };
+
+    const input = document.getElementById("term-input");
+    const body = document.getElementById("term-body");
+    const promptLine = document.getElementById("prompt-line");
+
+    input?.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter") return;
+        event.preventDefault();
+
+        const value = (input.textContent ?? "").trim();
+        const output = commands[value] ?? `command not found: ${value}`;
+
+        const echoed = document.createElement("p");
+        echoed.className = "line";
+        echoed.textContent = `guest@vaimer9:~$ ${value}`;
+
+        const result = document.createElement("p");
+        result.className = "line";
+        result.textContent = output;
+
+        body?.insertBefore(echoed, promptLine);
+        body?.insertBefore(result, promptLine);
+        input.textContent = "";
+        body?.scrollTo({ top: body.scrollHeight });
+    });
+</script>
