@@ -1,58 +1,156 @@
 ---
-
-import '../styles/global.css';
+import HomeLayout from './HomeLayout.astro';
 const { frontmatter } = Astro.props;
-
 ---
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>{frontmatter.title}</title>
-</head>
-<body class="internal-body">
-    <div class="main-title">{frontmatter.title}</div>
-    <div class="container">
-        <slot/>
-    </div>
-</body>
-</html>
+<HomeLayout title={frontmatter.title}>
+    <article class="blog-post">
+        <header class="post-header">
+            <h1 class="post-title">{frontmatter.title}</h1>
+            {frontmatter.date && (
+                <div class="post-date">
+                    {new Date(frontmatter.date).toLocaleDateString('en-US', {
+                        year: 'numeric', month: 'long', day: 'numeric'
+                    })}
+                </div>
+            )}
+        </header>
+        <div class="post-body">
+            <slot />
+        </div>
+    </article>
+</HomeLayout>
 
 <style>
-
-.main-title {
-    margin-bottom: 2em;
-    margin-top: 1em;
-    color: orange;
-    font-size: 4em;
-}
-
-.internal-body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    background-color: #222;
-}
-
-.container {
-    font-size: 22px;
-    width: auto;
-    padding: 0 0.5em 0 0.5em;
-}
-
-h1 {
-    color: red;
-}
-
-@media (min-width:800px) {
-    .container {
-        width: 60vw;
+    .blog-post {
+        --content-width: 950px;
+        max-width: var(--content-width);
+        width: 100%;
+        margin: 0 auto;
+        padding: 4rem 1.5rem 6rem;
+        box-sizing: border-box;
+        overflow-wrap: break-word;
+        word-break: break-word;
     }
-}
 
+    .post-header {
+        margin-bottom: 3rem;
+        border-bottom: 1px solid var(--c-blog);
+        padding-bottom: 1.5rem;
+    }
+
+    .post-title {
+        font-family: var(--font-mono);
+        font-size: 2.25rem;
+        line-height: 1.2;
+        color: var(--c-blog);
+        margin: 0 0 0.5rem;
+    }
+
+    .post-date {
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        color: var(--text-dim);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+    }
+
+    .post-body {
+        font-family: var(--font-serif, Georgia, "Times New Roman", serif);
+        font-size: 1.15rem;
+        line-height: 1.75;
+        color: var(--text);
+    }
+
+    .post-body :global(h2) {
+        font-family: var(--font-mono);
+        font-size: 1.4rem;
+        color: var(--c-blog);
+        margin-top: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .post-body :global(h3) {
+        font-family: var(--font-mono);
+        font-size: 1.15rem;
+        margin-top: 2rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .post-body :global(p) {
+        margin: 0 0 1.25rem;
+    }
+
+    .post-body :global(a) {
+        color: var(--c-blog);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        overflow-wrap: break-word;
+        word-break: break-word;
+    }
+
+    .post-body :global(a:hover) {
+        color: var(--text);
+    }
+
+    .post-body :global(code) {
+        font-family: var(--font-mono);
+        font-size: 1.15rem;
+        background: rgba(255, 255, 255, 0.06);
+        padding: 0.15em 0.4em;
+        border-radius: 3px;
+        overflow-wrap: break-word;
+        word-break: break-word;
+    }
+
+    .post-body :global(pre) {
+        font-family: var(--font-mono);
+        font-size: 1rem;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--text-dim);
+        padding: 1rem;
+        overflow-x: auto;
+        margin: 1.5rem 0;
+        max-width: 100%;
+    }
+
+    .post-body :global(pre code) {
+        background: none;
+        padding: 0;
+        overflow-wrap: normal;
+        word-break: normal;
+    }
+
+    .post-body :global(blockquote) {
+        border-left: 2px solid var(--c-blog);
+        margin: 1.5rem 0;
+        padding-left: 1rem;
+        color: var(--text-dim);
+        font-style: italic;
+    }
+
+    .post-body :global(ul),
+    .post-body :global(ol) {
+        margin: 0 0 1.25rem;
+        padding-left: 1.5rem;
+    }
+
+    .post-body :global(li) {
+        margin-bottom: 0.4rem;
+    }
+
+    .post-body :global(img) {
+        max-width: 100%;
+        height: auto;
+        margin: 2rem 0;
+        display: block;
+    }
+
+    @media (max-width: 600px) {
+        .post-title {
+            font-size: 1.75rem;
+        }
+        .post-body {
+            font-size: 1.05rem;
+        }
+    }
 </style>

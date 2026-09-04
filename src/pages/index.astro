@@ -14,7 +14,7 @@ import AnonymousBox from '../components/AnonymousBox.astro';
 
 ---
 
-<HomeLayout title="vaimer9">
+<HomeLayout title="v9 Labs">
     <main class="page">
         <Header />
  
@@ -25,11 +25,11 @@ import AnonymousBox from '../components/AnonymousBox.astro';
             </div>
  
             <div class="right-col">
-                <PhotoCollage />
                 <div class="bottom-row">
                     <BlogHomeList />
-                    <AnonymousBox />
+                    <!-- <AnonymousBox /> -->
                 </div>
+                <PhotoCollage />
             </div>
         </div>
     </main>
@@ -58,7 +58,7 @@ import AnonymousBox from '../components/AnonymousBox.astro';
     .body-grid {
         flex: 1;
         display: grid;
-        grid-template-columns: minmax(260px, 34%) 1fr;
+        grid-template-columns: minmax(260px, 40%) 1fr;
         grid-template-rows: 1fr;
         gap: 0.5rem;
         min-height: 0;
@@ -84,17 +84,18 @@ import AnonymousBox from '../components/AnonymousBox.astro';
     }
  
     .right-col :global(.photo-collage) {
-        flex: 0 0 60%;
+        flex: 0 0 55%;
         min-height: 0;
     }
  
     .bottom-row {
         flex: 1;
         display: grid;
-        grid-template-columns: 2.2fr 1fr;
+        /* grid-template-columns: 2.2fr 1fr; */
         grid-template-rows: 1fr;
         gap: 0.5rem;
         min-height: 0;
+        /* background-color: red; */
     }
  
     @media (max-width: 860px) {

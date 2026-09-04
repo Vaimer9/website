@@ -1,20 +1,26 @@
 ---
 // Swap this for real posts (content collection, API, etc.) later.
-const posts = [
-    { title: "setting up vsh", date: "2026-06-02" },
-    { title: "notes on the pi pico", date: "2026-05-14" },
-    { title: "why detach exists", date: "2026-04-30" },
-];
+// const posts = [
+//     { title: "setting up vsh", date: "2026-06-02" },
+//     { title: "notes on the pi pico", date: "2026-05-14" },
+//     { title: "why detach exists", date: "2026-04-30" },
+// ];
+
+const postModules = import.meta.glob('../pages/blog/*.{md,mdx}', {eager: true});
+const posts = Object.values(postModules).sort(
+    (a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf()
+);
+
 ---
 
 <section class="blog-list">
-    <h2>BLOG</h2>
+    <h2>~/vaimer9/blog</h2>
     <ul>
         {
             posts.map((post) => (
                 <li>
-                    <a href="#">{post.title}</a>
-                    <span class="date">{post.date}</span>
+                    <a href={post.url}>{post.frontmatter.title}</a>
+                    <span class="date">{post.frontmatter.date}</span>
                 </li>
             ))
         }
