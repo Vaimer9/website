@@ -5,4 +5,27 @@ date: "Sep 3 2026"
 description: "Introduction to my blogs"
 ---
 
-# Introduction
+Hi there! I'm Adwait Rathee. Currently a SWE undergrad.
+
+I've been in the programming sphere since 2021, originally starting because I wanted to make minecraft mods (I was severely addicted to minecraft during covid). Somehow stumbled my way into learning rust and then got into random lower level development.
+
+
+## What to expect?
+I'm constantly trying to learn new technologies and gain any esoteric knowledge along the way. I plan on using this website as a web-journal of sorts. Containing logs of what I might learn in the foreseeable future.
+
+I have a few ideas planned for future blogs. The current one that I am working on features this monstrosity of a macro and goes through how we can end up with something similar
+```cpp
+#define HAS_METHOD(c, x) ({ \
+    auto true_path = [](auto t) -> decltype(std::declval<typename decltype(t)::type>().x(), std::true_type{}) { return {}; }; \
+    auto false_path = [](...) -> std::false_type { return {}; }; \
+    struct Overload : decltype(true_path), decltype(false_path) { \
+        using decltype(true_path)::operator(); \
+        using decltype(false_path)::operator(); \
+    } detector; \
+    decltype(detector(std::declval<std::type_identity<c>>()))::value; \
+})
+```
+
+This might give you a vibe of what type of content I'm trying to create here. Insanity aside, I am also planning on a Kokou No Hito manga review soon. It's going to take a lot more thought and introspection to write so it might take some time.
+
+With all this said, I'll see you in my next blogpost. Happy Hacking!

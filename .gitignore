@@ -2,6 +2,7 @@
 dist/
 .output/
 .astro/
+./src/pages/blog/.obsidian/
 
 node_modules/
 
@@ -15,3 +16,4 @@ src/pages/blog/.obsidian
 .env.production
 
 .DS_Store
+
