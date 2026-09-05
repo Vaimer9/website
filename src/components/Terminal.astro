@@ -13,7 +13,9 @@
             Welcome. Type <span class="hl">help</span> to see available commands.
         </p>
         <p class="line prompt-line" id="prompt-line">
-            <span class="prompt">guest@vaimer9:~$</span>
+            <span class="prompt">
+                <span class="prompt-path">guest@vaimer9:~</span><span class="prompt-symbol">$</span>
+            </span>
             <span
                 id="term-input"
                 class="term-input"
@@ -81,6 +83,7 @@
         font-size: 0.9rem;
         line-height: 1.6;
         min-height: 0;
+        position: relative; /* anchors the matrix canvas */
     }
 
     .line {
@@ -103,45 +106,240 @@
         white-space: nowrap;
     }
 
+    .prompt-symbol {
+        /* kept separate from the path so it's an explicit, styleable element */
+        margin-left: 1px;
+    }
+
     .term-input {
         flex: 1;
         outline: none;
         caret-color: var(--c-terminal);
     }
+
+    .term-output {
+        font-family: "Fira Code", "JetBrains Mono", ui-monospace, SFMono-Regular,
+            Menlo, monospace;
+        white-space: pre;
+        overflow-x: auto;
+    }
+
+    .matrix-canvas {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 5;
+    }
 </style>
 
 <script>
-    // VERY basic terminal logic
-    // TODO: Make ts better
-    const commands = {
-        help: "available: about, whoami, neofetch, help",
-        whoami: "guest",
-        about: "adwait — building vaimer9's basement.",
-        neofetch: "OS: vaimer9-OS  |    Shell: vsh  |  Uptime: ???",
-    };
+    interface Command {
+        description: string;
+        run: (args: string[]) => string | Promise<string>;
+    }
+
+    const PROMPT = "guest@vaimer9:~$";
+
+    // Edit this to write your own about-me text — one entry per array line.
+    const ABOUT_LINES = [
+        "> CSE Undergrad",
+        "> Programming | Mountaineering | Manga | Music",
+        // TODO: add more about yourself here.
+    ];
+
+    function buildNeofetch(): string {
+        const logo = [
+            "      /\\",
+            "     /  \\",
+            "    /    \\",
+            "   /      \\",
+            "  /   __   \\",
+            " /___|  |___\\",
+        ];
+
+        const specs = [
+            "guest@vaimer9",
+            "-------------",
+            "OS: Arch Linux x86_64",
+            "WM: niri (Wayland)",
+            "Shell: zsh",
+        ];
+
+        const rows = Math.max(logo.length, specs.length);
+        const lines: string[] = [];
+
+        for (let i = 0; i < rows; i++) {
+            const left = (logo[i] ?? "").padEnd(16);
+            const right = specs[i] ?? "";
+            lines.push(`${left}  ${right}`);
+        }
+
+        return lines.join("\n");
+    }
+
+    function buildCowsay(message: string): string {
+        const border = "-".repeat(message.length + 2);
+        return [
+            ` ${border}`,
+            `< ${message} >`,
+            ` ${border}`,
+            "        \\   ^__^",
+            "         \\  (oo)\\_______",
+            "            (__)\\       )\\/\\",
+            "                ||----w |",
+            "                ||     ||",
+        ].join("\n");
+    }
+
+    function runMatrix(container: HTMLElement): Promise<string> {
+        return new Promise((resolve) => {
+            const canvas = document.createElement("canvas");
+            canvas.className = "matrix-canvas";
+            container.appendChild(canvas);
+
+            const ctx = canvas.getContext("2d");
+            if (!ctx) {
+                canvas.remove();
+                resolve("matrix: canvas not supported");
+                return;
+            }
+
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight;
+
+            const accent =
+                getComputedStyle(container).getPropertyValue("--c-terminal").trim() ||
+                "#27c93f";
+
+            const fontSize = 14;
+            const columns = Math.max(1, Math.floor(canvas.width / fontSize));
+            const drops = new Array(columns).fill(0);
+            const glyphs = "01アイウエオカキクケコサシスセソ";
+
+            let frame = 0;
+            const totalFrames = 120;
+
+            const timer = window.setInterval(() => {
+                ctx.fillStyle = "rgba(0, 0, 0, 0.15)";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.fillStyle = accent;
+                ctx.font = `${fontSize}px monospace`;
+
+                drops.forEach((dropRow, col) => {
+                    const glyph = glyphs[Math.floor(Math.random() * glyphs.length)];
+                    ctx.fillText(glyph, col * fontSize, dropRow * fontSize);
+                    drops[col] =
+                        dropRow * fontSize > canvas.height && Math.random() > 0.975
+                            ? 0
+                            : dropRow + 1;
+                });
+
+                frame += 1;
+                if (frame >= totalFrames) {
+                    window.clearInterval(timer);
+                    canvas.remove();
+                    resolve("wake up, Neo...");
+                }
+            }, 35);
+        });
+    }
 
     const input = document.getElementById("term-input");
     const body = document.getElementById("term-body");
     const promptLine = document.getElementById("prompt-line");
 
-    input?.addEventListener("keydown", (event) => {
-        if (event.key !== "Enter") return;
-        event.preventDefault();
+    if (input && body && promptLine) {
+        const commands: Record<string, Command> = {
+            help: {
+                description: "list available commands",
+                run: () =>
+                    Object.entries(commands)
+                        .map(([name, cmd]) => `${name.padEnd(10)}- ${cmd.description}`)
+                        .join("\n"),
+            },
+            whoami: {
+                description: "print the current user",
+                run: () => "guest",
+            },
+            about: {
+                description: "a little about me",
+                run: () => ABOUT_LINES.join("\n"),
+            },
+            neofetch: {
+                description: "show system info",
+                run: () => buildNeofetch(),
+            },
+            cowsay: {
+                description: "make a cow say something",
+                run: (args) => buildCowsay(args.join(" ") || "Moo!"),
+            },
+            matrix: {
+                description: "wake up, Neo...",
+                run: () => runMatrix(body),
+            },
+            clear: {
+                description: "clear the terminal",
+                run: () => {
+                    Array.from(body.children).forEach((child) => {
+                        if (child !== promptLine) child.remove();
+                    });
+                    return "";
+                },
+            },
+            sudo: {
+                description: "try to gain power you don't have",
+                run: () =>
+                    "No.",
+            },
+            echo: {
+                description: "print back your text",
+                run: (args) => args.join(" "),
+            },
+            date: {
+                description: "show the current date and time",
+                run: () => new Date().toLocaleString(),
+            },
+        };
 
-        const value = (input.textContent ?? "").trim();
-        const output = commands[value] ?? `command not found: ${value}`;
+        // Runs a command exactly as if the user had typed it and hit Enter.
+        // Used both by the input handler and to auto-run "about" on load.
+        async function execute(raw: string): Promise<void> {
+            if (!body || !promptLine) return;
 
-        const echoed = document.createElement("p");
-        echoed.className = "line";
-        echoed.textContent = `guest@vaimer9:~$ ${value}`;
+            const echoed = document.createElement("p");
+            echoed.className = "line";
+            echoed.textContent = `${PROMPT} ${raw}`;
+            body.insertBefore(echoed, promptLine);
 
-        const result = document.createElement("p");
-        result.className = "line";
-        result.textContent = output;
+            const [name, ...args] = raw.split(/\s+/);
+            const command = commands[name.toLowerCase()];
+            const outputText = command
+                ? await command.run(args)
+                : `command not found: ${name}`;
 
-        body?.insertBefore(echoed, promptLine);
-        body?.insertBefore(result, promptLine);
-        input.textContent = "";
-        body?.scrollTo({ top: body.scrollHeight });
-    });
+            if (outputText) {
+                const result = document.createElement("pre");
+                result.className = "line term-output";
+                result.textContent = outputText;
+                body.insertBefore(result, promptLine);
+            }
+
+            body.scrollTo({ top: body.scrollHeight });
+        }
+
+        input.addEventListener("keydown", async (event) => {
+            if (event.key !== "Enter") return;
+            event.preventDefault();
+
+            const raw = (input.textContent ?? "").trim();
+            input.textContent = "";
+            if (!raw) return;
+
+            await execute(raw);
+        });
+
+        // Show "about" immediately on load, no typing required.
+        void execute("about");
+    }
 </script>
