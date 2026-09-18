@@ -1,0 +1,94 @@
+---
+// Goes at: src/pages/contact.astro
+import HomeLayout from '../layouts/HomeLayout.astro';
+import Header from '../components/Header.astro';
+
+// TODO: swap these for your real details
+const EMAIL = "you@example.com";
+const TWITTER = "https://twitter.com/yourhandle";
+const GITHUB = "https://github.com/vaimer9";
+---
+
+<HomeLayout title="contact — v9 labs">
+    <main class="page">
+        <Header />
+
+        <section class="contact-box">
+            <h2>~/vaimer9/contact</h2>
+            <ul>
+                <li>
+                    <span class="label">email</span>
+                    <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+                </li>
+                <li>
+                    <span class="label">twitter</span>
+                    <a href={TWITTER} target="_blank" rel="noopener noreferrer">{TWITTER.replace('https://', '')}</a>
+                </li>
+                <li>
+                    <span class="label">github</span>
+                    <a href={GITHUB} target="_blank" rel="noopener noreferrer">{GITHUB.replace('https://', '')}</a>
+                </li>
+            </ul>
+        </section>
+    </main>
+</HomeLayout>
+
+<style>
+    .page {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 1.25rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        min-height: 100vh;
+    }
+
+    .contact-box {
+        border: 1px solid var(--c-contact);
+        border-radius: var(--radius);
+        padding: 1.5rem 1.75rem;
+        margin-top: 2rem;
+    }
+
+    h2 {
+        margin: 0 0 1.25rem;
+        color: var(--c-contact);
+        font-size: 1.1rem;
+    }
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.9rem;
+    }
+
+    li {
+        display: flex;
+        gap: 1rem;
+        align-items: baseline;
+        border-bottom: 1px solid rgba(216, 216, 224, 0.15);
+        padding-bottom: 0.6rem;
+    }
+
+    .label {
+        color: var(--text-dim);
+        width: 70px;
+        flex-shrink: 0;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 0.06em;
+    }
+
+    a {
+        color: var(--text);
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: var(--c-contact);
+    }
+</style>

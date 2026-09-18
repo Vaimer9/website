@@ -1,0 +1,55 @@
+---
+// Goes at: src/pages/about.astro
+import HomeLayout from '../layouts/HomeLayout.astro';
+import Header from '../components/Header.astro';
+---
+
+<HomeLayout title="about — v9 labs">
+    <main class="page">
+        <Header />
+
+        <section class="about-box">
+            <h2>~/vaimer9/about</h2>
+            <div class="about-content">
+                <!-- TODO: write about yourself here -->
+                <p>...</p>
+            </div>
+        </section>
+    </main>
+</HomeLayout>
+
+<style>
+    .page {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 1.25rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        min-height: 100vh;
+    }
+
+    .about-box {
+        border: 1px solid var(--c-about);
+        border-radius: var(--radius);
+        padding: 1.5rem 1.75rem;
+        margin-top: 2rem;
+    }
+
+    h2 {
+        margin: 0 0 1.25rem;
+        color: var(--c-about);
+        font-size: 1.1rem;
+    }
+
+    .about-content {
+        font-family: var(--font-serif, Georgia, "Times New Roman", serif);
+        font-size: 1.05rem;
+        line-height: 1.75;
+        color: var(--text);
+    }
+
+    .about-content :global(p) {
+        margin: 0 0 1.25rem;
+    }
+</style>
