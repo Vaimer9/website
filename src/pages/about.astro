@@ -1,5 +1,4 @@
 ---
-// Goes at: src/pages/about.astro
 import HomeLayout from '../layouts/HomeLayout.astro';
 import Header from '../components/Header.astro';
 ---
@@ -9,10 +8,12 @@ import Header from '../components/Header.astro';
         <Header />
 
         <section class="about-box">
-            <h2>~/vaimer9/about</h2>
+            <h2>~/v9-labs/about</h2>
             <div class="about-content">
-                <!-- TODO: write about yourself here -->
-                <p>...</p>
+                <p>19 - CSE Undergrad - Based in India - Future mountaineer.</p>
+                <p>I have experience with several low-level languages such as C, C++ and Rust, and
+                technologies such as openGL, x11 and Unix.</p>
+                <p>Currently on Arch linux but I plan on migrating to nixOS (It's concept is really cool).</p>
             </div>
         </section>
     </main>
@@ -51,5 +52,6 @@ import Header from '../components/Header.astro';
 
     .about-content :global(p) {
         margin: 0 0 1.25rem;
+        font-size: 1.09rem;
     }
 </style>
